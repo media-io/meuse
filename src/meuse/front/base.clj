@@ -47,9 +47,7 @@
 (def footer
   [:footer {:class "container"}
    [:p
-    [:a {:href "https://meuse.mcorbin.fr/"} "Documentation"] " · "
-    [:a {:href "https://github.com/mcorbin/meuse"} "Github"] " · "
-    "Made by " [:a {:href "https://mcorbin.fr"} "mcorbin"]]])
+    "Rust registry for " [:a {:href "https://media-io.com"} "Media-IO"]]])
 
 (defn html
   [body public-frontend]
