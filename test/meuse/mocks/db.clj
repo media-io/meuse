@@ -43,7 +43,7 @@
 
 (defn crate-version-mock
   [{:keys [count-crates-versions inc-download last-updated
-           top-n-downloads update-yank sum-download-count]}]
+           top-n-downloads update-yank sum-download-count delete]}]
   (protocol/spy ICrateVersionDB
                 (reify ICrateVersionDB
                   (count-crates-versions [this] count-crates-versions)
@@ -51,7 +51,8 @@
                   (last-updated [this n] last-updated)
                   (top-n-downloads [this n] top-n-downloads)
                   (update-yank [this crate-name crate-version yanked?] update-yank)
-                  (sum-download-count [this] sum-download-count))))
+                  (sum-download-count [this] sum-download-count)
+                  (delete [this crate-name version] delete))))
 
 (defn search-mock
   [{:keys [search]}]
@@ -60,12 +61,13 @@
                   (search [this query-string] search))))
 
 (defn token-mock
-  [{:keys [by-user create delete get-token-user-role]}]
+  [{:keys [by-user create delete get-token-user-role set-last-used]}]
   (protocol/spy ITokenDB
                 (reify ITokenDB
                   (by-user [this user-name] by-user)
                   (create [this token] create)
                   (delete [this user-name token-name] delete)
+                  (set-last-used [this token-id] set-last-used)
                   (get-token-user-role [this token] get-token-user-role))))
 
 (defn user-mock
